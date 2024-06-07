@@ -3,7 +3,7 @@ Fuzzy Logic python code (without Scikit Lib.), created for "Fundamental of Intel
 FIS --> using Mamdani max - min method.
 Defuzzification --> using centroid.
 Code is based on an example to find body condition, with 2 inputs (height and weight).
-(c) Adib S. - 2024
+(c) AS. - 2024
 """
 
 import matplotlib.pyplot as plt
@@ -26,8 +26,8 @@ class main_fuzzy:
 
         # self.in_1 = float(input('Please specify your input - Height (cm) (range 0-200): '))
         # self.in_2 = float(input('Please specify your input - Weight (kg) (range 0-200): '))
-        self.in_1 = 125     # input value for imf 1
-        self.in_2 = 75      # input value for imf 2
+        self.in_1 = 150     # input value for imf 1
+        self.in_2 = 70      # input value for imf 2
         print("\nInput: Height (cm) --> " + str(self.in_1))
         print("Input: Weight (kg) --> " + str(self.in_2))
 
@@ -199,7 +199,7 @@ class main_fuzzy:
         ax3.xaxis.set_ticks(np.arange(self.x_axis_start, self.x_axis_finish, 20))
         for i in range(len(self.x_omf)):
             plt.plot(self.x_axis_range, self.miu_x_omf_plt[i], linewidth=3.5, label=self.label3[i])
-        plt.ylabel('IMF 3 - Body Cond.')
+        plt.ylabel('OMF - Body Cond.')
         plt.legend()
 
         ax4 = plt.subplot(2, 2, 2)      # plot max value of each rule --> omf
