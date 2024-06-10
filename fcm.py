@@ -22,7 +22,9 @@ class main_fcm:
         # self.dat = [[1, 6], [4, 4], [7, 4], [5, 5], [0, 4]]
         # self.n_dat = len(self.dat)  # number of data
 
-        self.c = 4  # number of cluster
+        self.c = 4      # number of cluster
+        self.weight = 2     # fuzzy weight (m')
+        self.tolerance = 0.01  # error tolerance each iteration
         self.u = np.zeros((self.c, self.n_dat))
         for i in range(self.n_dat):
             temp = np.random.randint(0, self.c)  # randomize the u matrix
@@ -41,11 +43,11 @@ class main_fcm:
             self.iter += 1
 
             # calculate the center vector (v)
-            num = np.matmul(self.squaring(self.u), self.dat)
+            num = np.matmul(self.power(self.u), self.dat)
             den = [[0 for i in range(1)] for j in range(len(self.u))]
             for i in range(len(self.u)):
                 for j in range(len(self.u[0])):
-                    den[i][0] += (self.u[i][j]) ** 2
+                    den[i][0] += (self.u[i][j]) ** self.weight
             self.v = np.divide(num, den)
 
             # calculate the distance (d) between each data and center vector
@@ -64,7 +66,7 @@ class main_fcm:
                 for k in range(len(self.dat)):
                     temp = 0
                     for j in range(len(self.v)):
-                        temp += (self.d[i][k] / self.d[j][k]) ** 2
+                        temp += (self.d[i][k] / self.d[j][k]) ** (2 / (self.weight - 1))
                     if math.isnan(temp ** -1):  # division with 0 can be occurred if center cluster overlap 1 of the data
                         self.u[i][k] = 1
                     else:
@@ -77,13 +79,13 @@ class main_fcm:
             self.flag = False
             for i in range(len(self.v)):
                 for k in range(len(self.dat)):
-                    if np.abs(self.u[i][k] - self.u_last[i][k]) >= 0.01:
+                    if np.abs(self.u[i][k] - self.u_last[i][k]) >= self.tolerance:
                         self.flag = True
 
-    def squaring(self, dat):
+    def power(self, dat):
         out = []
         for i in range(len(dat)):
-            out.append([j ** 2 for j in dat[i]])
+            out.append([j ** self.weight for j in dat[i]])
         return out
 
     def plot(self):
