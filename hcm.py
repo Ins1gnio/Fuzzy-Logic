@@ -1,6 +1,6 @@
 """
-Hard c-means python code (without scikit Lib.), created for "Fundamental of Intelligent System" Class, BME.
-Code algorithm is based on book byy Timothy J. Ross (Fuzzy Logic with Engineering Application, pp. 371).
+Hard c-means python code (without Lib.), created for "Fundamental of Intelligent System" Class, BME.
+Code algorithm is based on book by Timothy J. Ross (Fuzzy Logic with Engineering Application, pp. 371)
 U matrix value is randomized using np.random, which can cause error at times if the U matrix not fully randomized,
 solution to this, you just need to run the code again. Reducing the c value also helps.
 (c) AS. - 2024
@@ -78,7 +78,6 @@ class main_hcm:
         plt.ylabel("y coordinate")
         plt.scatter([i[0] for i in self.dat], [i[1] for i in self.dat])
 
-        idx = [0] * len(self.u[0])
         x_plt = []
         for i in range(self.c):
             x_plt.append([])
@@ -86,9 +85,7 @@ class main_hcm:
         for i in range(len(self.u[0])):
             for j in range(len(self.u)):
                 if self.u[j][i] == 1:
-                    idx[i] = j
                     x_plt[j].append(self.dat[i])
-        print(x_plt)
 
         ax2 = plt.subplot(1, 2, 2)  # scatter plot data with cluster color
         plt.title("HCM Clustering")
@@ -98,7 +95,6 @@ class main_hcm:
             x, y = zip(*x_plt[i])
             plt.scatter(x, y, color=self.color[i], label='Cluster ' + str(i))
             plt.scatter(self.v[i][0], self.v[i][1], color=self.color[i], s=50, marker='x')  # center cluster
-        print(self.v)
         ax2.legend()
         plt.show()
 
