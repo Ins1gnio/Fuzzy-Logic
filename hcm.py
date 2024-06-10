@@ -1,5 +1,5 @@
 """
-Hard c-means python code (without Lib.), created for "Fundamental of Intelligent System" Class, BME.
+Hard c-means python code (without scikit Lib.), created for "Fundamental of Intelligent System" Class, BME.
 Code algorithm is based on book byy Timothy J. Ross (Fuzzy Logic with Engineering Application, pp. 371).
 U matrix value is randomized using np.random, which can cause error at times if the U matrix not fully randomized,
 solution to this, you just need to run the code again. Reducing the c value also helps.
